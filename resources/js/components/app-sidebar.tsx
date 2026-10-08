@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
+import { BookOpen, Globe, Inbox, LayoutGrid } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -15,6 +15,7 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import { inbox, show as website } from '@/routes/website';
 import type { NavItem } from '@/types';
 
 export function AppSidebar() {
@@ -29,17 +30,26 @@ export function AppSidebar() {
             href: dashboardUrl,
             icon: LayoutGrid,
         },
+        ...(page.props.currentTeam && page.props.canManageWebsite
+            ? [
+                  {
+                      title: 'Website',
+                      href: website(page.props.currentTeam.slug),
+                      icon: Globe,
+                  },
+                  {
+                      title: 'Inbox',
+                      href: inbox(page.props.currentTeam.slug),
+                      icon: Inbox,
+                  },
+              ]
+            : []),
     ];
 
     const footerNavItems: NavItem[] = [
         {
-            title: 'Repository',
-            href: 'https://github.com/laravel/react-starter-kit',
-            icon: FolderGit2,
-        },
-        {
-            title: 'Documentation',
-            href: 'https://laravel.com/docs/starter-kits#react',
+            title: 'FilamentCraft docs',
+            href: 'https://filamentcraft.dev/guide/inertia-react',
             icon: BookOpen,
         },
     ];

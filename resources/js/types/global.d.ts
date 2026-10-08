@@ -15,6 +15,7 @@ declare module '@inertiajs/core' {
             sidebarOpen: boolean;
             currentTeam: Team | null;
             teams: Team[];
+            canManageWebsite: boolean;
             [key: string]: unknown;
         };
     }
